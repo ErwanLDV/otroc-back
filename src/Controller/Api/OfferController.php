@@ -276,9 +276,9 @@ class OfferController extends AbstractController
         }
 
         $oldPicture = ($offer->getPicture() !== null) ? $offer->getPicture() : "";
-        if(str_contains($oldPicture, 'http://yannlebouc-server.eddi.cloud/projet-11-o-troc-back/public/img/')) {
-            $pictureFile = str_replace('http://yannlebouc-server.eddi.cloud/projet-11-o-troc-back/public/img/', "", $oldPicture);
-            unlink('/var/www/html/projet-11-o-troc-back/public/img/' . $pictureFile);
+        if(str_contains($oldPicture, 'http://localhost:8000/img/public/img/')) {
+            $pictureFile = str_replace('http://localhost:8000/img/public/img/', "", $oldPicture);
+            unlink('http://o-troc.fr:8000/img' . $pictureFile);
         }
 
         $doctrine->remove($offer);
