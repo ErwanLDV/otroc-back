@@ -568,13 +568,13 @@ class UserController extends AbstractController
         $oldPicture = $user->getPicture();
         if(str_contains($oldPicture, 'http://back.o-troc.fr/img/')) {
             $pictureFile = str_replace('http://back.o-troc.fr/img/', "", $oldPicture);
-            unlink('http://back.o-troc.fr/img' . $pictureFile);
+            unlink('/var/www/html/sites/otroc/otroc-back/public/img/' . $pictureFile);
         }
 
         try {
             $image = $request->files->get('file');
             $imageName = uniqid() . '_' . $image->getClientOriginalName();
-            $image->move('http://o-troc.fr:8000/img', $imageName);
+            $image->move('/var/www/html/sites/otroc/otroc-back/public/img/', $imageName);
         
             $user->setPicture('http://back.o-troc.fr/img/'.$imageName);
 

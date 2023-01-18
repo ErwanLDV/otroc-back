@@ -274,7 +274,7 @@ class WishController extends AbstractController
         $oldPicture = ($wish->getPicture() !== null) ? $wish->getPicture() : "";
         if(str_contains($oldPicture, 'http://back.o-troc.fr/img/')) {
             $pictureFile = str_replace('http://back.o-troc.fr/img/', "", $oldPicture);
-            unlink('http://back.o-troc.fr/img/' . $pictureFile);
+            unlink('/var/www/html/sites/otroc/otroc-back/public/img/' . $pictureFile);
         }
 
         $doctrine->remove($wish);
@@ -361,7 +361,7 @@ class WishController extends AbstractController
         try {
             $image = $request->files->get('file');
             $imageName = uniqid() . '_' . $image->getClientOriginalName();
-            $image->move('http://back.o-troc.fr/img/', $imageName);
+            $image->move('/var/www/html/sites/otroc/otroc-back/public/img/', $imageName);
         
             $wish->setPicture('http://back.o-troc.fr/img/'.$imageName);
             // $user->setPicture($parameterBag->get('public').'/img/'.$imageName);
