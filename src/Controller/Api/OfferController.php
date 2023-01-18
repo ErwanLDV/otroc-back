@@ -363,9 +363,9 @@ class OfferController extends AbstractController
         try {
             $image = $request->files->get('file');
             $imageName = uniqid() . '_' . $image->getClientOriginalName();
-            $image->move('/var/www/html/projet-11-o-troc-back/public/img', $imageName);
+            $image->move('http://o-troc.fr:8000/img', $imageName);
         
-            $offer->setPicture('http://yannlebouc-server.eddi.cloud/projet-11-o-troc-back/public/img/'.$imageName);
+            $offer->setPicture('http://localhost:8000/img/'.$imageName);
             // $offer->setPicture('http://yann-lebouc.vpnuser.lan:8081/img/'.$imageName);
 
             $doctrine->flush();

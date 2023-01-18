@@ -361,9 +361,9 @@ class WishController extends AbstractController
         try {
             $image = $request->files->get('file');
             $imageName = uniqid() . '_' . $image->getClientOriginalName();
-            $image->move('/var/www/html/projet-11-o-troc-back/public/img', $imageName);
+            $image->move('http://o-troc.fr:8000/img', $imageName);
         
-            $wish->setPicture('http://yannlebouc-server.eddi.cloud/projet-11-o-troc-back/public/img/'.$imageName);
+            $wish->setPicture('http://localhost:8000/img/'.$imageName);
             // $user->setPicture($parameterBag->get('public').'/img/'.$imageName);
 
             $doctrine->flush();

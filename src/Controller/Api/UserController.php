@@ -566,17 +566,17 @@ class UserController extends AbstractController
         }
 
         $oldPicture = $user->getPicture();
-        if(str_contains($oldPicture, 'http://yannlebouc-server.eddi.cloud/projet-11-o-troc-back/public/img/')) {
-            $pictureFile = str_replace('http://yannlebouc-server.eddi.cloud/projet-11-o-troc-back/public/img/', "", $oldPicture);
-            unlink('/var/www/html/projet-11-o-troc-back/public/img/' . $pictureFile);
+        if(str_contains($oldPicture, 'http://localhost:8000/img/')) {
+            $pictureFile = str_replace('http://localhost:8000/img/', "", $oldPicture);
+            unlink('http://o-troc.fr:8000/img' . $pictureFile);
         }
 
         try {
             $image = $request->files->get('file');
             $imageName = uniqid() . '_' . $image->getClientOriginalName();
-            $image->move('/var/www/html/projet-11-o-troc-back/public/img', $imageName);
+            $image->move('http://o-troc.fr:8000/img', $imageName);
         
-            $user->setPicture('http://yannlebouc-server.eddi.cloud/projet-11-o-troc-back/public/img/'.$imageName);
+            $user->setPicture('http://localhost:8000/img/'.$imageName);
 
             $doctrine->flush();
         } catch (\Exception $e) {
