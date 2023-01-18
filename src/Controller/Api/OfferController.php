@@ -276,9 +276,9 @@ class OfferController extends AbstractController
         }
 
         $oldPicture = ($offer->getPicture() !== null) ? $offer->getPicture() : "";
-        if(str_contains($oldPicture, 'http://localhost:8000/img/public/img/')) {
-            $pictureFile = str_replace('http://localhost:8000/img/public/img/', "", $oldPicture);
-            unlink('http://o-troc.fr:8000/img' . $pictureFile);
+        if(str_contains($oldPicture, 'http://back.o-troc.fr/img/')) {
+            $pictureFile = str_replace('http://back.o-troc.fr/img/', "", $oldPicture);
+            unlink('http://back.o-troc.fr/img/' . $pictureFile);
         }
 
         $doctrine->remove($offer);
@@ -363,9 +363,9 @@ class OfferController extends AbstractController
         try {
             $image = $request->files->get('file');
             $imageName = uniqid() . '_' . $image->getClientOriginalName();
-            $image->move('http://o-troc.fr:8000/img', $imageName);
+            $image->move('http://back.o-troc.fr/img/', $imageName);
         
-            $offer->setPicture('http://localhost:8000/img/'.$imageName);
+            $offer->setPicture('http://back.o-troc.fr/img/'.$imageName);
             // $offer->setPicture('http://yann-lebouc.vpnuser.lan:8081/img/'.$imageName);
 
             $doctrine->flush();

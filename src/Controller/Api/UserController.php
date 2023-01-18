@@ -272,7 +272,7 @@ class UserController extends AbstractController
             );
         }
 
-        $newUser->setPicture('http://localhost:8000/img/assets/images/sbcf-default-avatar.png');
+        $newUser->setPicture('http://back.o-troc.fr/assets/images/sbcf-default-avatar.png');
         $hashedPassword = $passwordHasher->hashPassword($newUser, $newUser->getPassword());
         $newUser->setPassword($hashedPassword);
 
@@ -566,9 +566,9 @@ class UserController extends AbstractController
         }
 
         $oldPicture = $user->getPicture();
-        if(str_contains($oldPicture, 'http://localhost:8000/img/')) {
-            $pictureFile = str_replace('http://localhost:8000/img/', "", $oldPicture);
-            unlink('http://o-troc.fr:8000/img' . $pictureFile);
+        if(str_contains($oldPicture, 'http://back.o-troc.fr/img/')) {
+            $pictureFile = str_replace('http://back.o-troc.fr/img/', "", $oldPicture);
+            unlink('http://back.o-troc.fr/img' . $pictureFile);
         }
 
         try {
@@ -576,7 +576,7 @@ class UserController extends AbstractController
             $imageName = uniqid() . '_' . $image->getClientOriginalName();
             $image->move('http://o-troc.fr:8000/img', $imageName);
         
-            $user->setPicture('http://localhost:8000/img/'.$imageName);
+            $user->setPicture('http://back.o-troc.fr/img/'.$imageName);
 
             $doctrine->flush();
         } catch (\Exception $e) {
